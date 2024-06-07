@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  # Dremio
+  dremio:
+    platform: linux/x86_64
+    image: dremio/dremio-oss:latest
+    ports:
+      - 9047:9047
+      - 31010:31010
+      - 32010:32010
+      - 45678:45678
+    container_name: dremio
+    volumes:
+      - ./dremio_volume/conf:/opt/dremio/conf
+      - ./dremio_volume/shared_mount_path:/shared_mount_path
+    networks:
+      demo:
+
+
+  data_loader:
+    build:
+      context: ./data_loader_script
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    networks:
+      demo:
+
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    hostname: mysql_database
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=movies
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql_volume:/var/lib/mysql
+    networks:
+      demo:
+
+
+networks:
+  demo:

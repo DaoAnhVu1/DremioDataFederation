@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+mysql_volume
+dremio_volume/shared_mount_path

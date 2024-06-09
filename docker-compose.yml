@@ -44,19 +44,5 @@ services:
     networks:
       - demo
 
-  # Spark Notebook
-  spark-notebook:
-    image: jupyter/pyspark-notebook
-    command: start-notebook.sh --ServerApp.password='sha1:d2887803f259:31c1bd6d04cd68c3317e88081a6b2a89a8f7f30b'
-    ports:
-      - 8888:8888
-      - 4040:4040
-    depends_on:
-      - dremio
-    volumes:
-      - ./spark-notebooks:/home/jovyan/work
-    networks:
-      - demo
-
 networks:
   demo:

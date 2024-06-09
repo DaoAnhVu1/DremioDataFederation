@@ -15,9 +15,9 @@ services:
       - ./dremio_volume/conf:/opt/dremio/conf
       - ./dremio_volume/shared_mount_path:/shared_mount_path
     networks:
-      demo:
+      - demo
 
-
+  # Data Loader
   data_loader:
     build:
       context: ./data_loader_script
@@ -25,9 +25,9 @@ services:
     depends_on:
       - mysql
     networks:
-      demo:
+      - demo
 
-
+  # MySQL
   mysql:
     image: mysql:latest
     container_name: mysql
@@ -42,8 +42,21 @@ services:
     volumes:
       - ./mysql_volume:/var/lib/mysql
     networks:
-      demo:
+      - demo
 
+  # Spark Notebook
+  spark-notebook:
+    image: jupyter/pyspark-notebook
+    command: start-notebook.sh --ServerApp.password='sha1:d2887803f259:31c1bd6d04cd68c3317e88081a6b2a89a8f7f30b'
+    ports:
+      - 8888:8888
+      - 4040:4040
+    depends_on:
+      - dremio
+    volumes:
+      - ./spark-notebooks:/home/jovyan/work
+    networks:
+      - demo
 
 networks:
   demo:

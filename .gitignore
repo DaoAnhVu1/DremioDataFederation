@@ -1,4 +1,5 @@
 node_modules/
 .DS_Store
 mysql_volume
+postgresql_volume
 dremio_volume/shared_mount_path

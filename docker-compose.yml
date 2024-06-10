@@ -44,5 +44,20 @@ services:
     networks:
       - demo
 
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    hostname: mypostgres_database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=top_movies
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql_volume:/var/lib/postgresql/data
+    networks:
+      - demo
+
 networks:
   demo:

@@ -3,3 +3,4 @@ node_modules/
 mysql_volume
 postgresql_volume
 dremio_volume/shared_mount_path
+aws-key.txt

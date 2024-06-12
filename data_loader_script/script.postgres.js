@@ -75,9 +75,9 @@ async function main() {
     await createTables();
 
     const recordCount = await getRecordCount();
-    if (recordCount > 10000) {
+    if (recordCount > 500) {
       console.log(
-        "There are already more than 10000 records in the database. Data load aborted."
+        "There are already more than 500 records in the database. Data load aborted."
       );
       return;
     }

@@ -24,7 +24,7 @@ public class Main {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM \"top_100_ratings\".\"result\";";
+            sql = "SELECT * FROM \"@daoanhvu\".\"top_500_ratings\";";
             System.out.println("Executing statement...");
             ResultSet rs = stmt.executeQuery(sql);
 
